@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+     {% include 'header.html' %}
+    <body>
+
+       <!--Chat Bot-->
+        <div id="dvChatbot">
+            <div class="box"></div>
+            <div class="chatIcon">
+                <img src="../static/img/chatbot.png" width="100px" height="100px">
+            </div>
+           
+            <div class="boxed hidden">
+                <div style="height: 80px; width: 475px;  border-radius: 8px; position: fixed; background-color: cornflowerblue; color:white;" align="center">
+                   <p style="font-size: large; margin: 20px 20px 20px 80px; "> Virtual Travel Agent️</p>
+                  <p style="font-size: smaller; margin: 20px 20px 20px 100px; margin-top: -15px;"> EbixCash Virtual Travel Agent </p>
+                <p class="close" style="margin-right: 2px; z-index: -99999; color: rgb(218, 38, 38); opacity:2; margin-top: -110px;">X</p>
+                </div>
+                <br/><br/><br/><br/>
+                <div id="chatbox">
+                  
+                </div>
+                
+                <div id="dots" class="hidden">
+                    <span class="dot"></span> <span class="dot"></span>
+                    <span class="dot"></span><span class="dot"></span>
+                </div>
+
+
+                <div id="userInput">
+                  <div class="form-group">
+                    <input id="textInput" class="form-control" type="text" name="msg" 
+                        placeholder="Type Message" />
+                    <button class="btn" style="width: 15%; height: 44px;  border-radius: 5px;" onclick="getBotResponse();">Send</button>
+                </div>
+                </div>
+             
+             
+            </div>
+          </div>
+        <!--End of Chatbot-->
+         <!-- Start-->
+       <div id="msg1" class="hidden" >
+           <p class="botText bot" style=""><span class="" >  Hi, I am your Virtual Agent</span></p>
+       </div>
+       <div id="msg2" class="hidden">
+            <p class="botText bot"><span>New Find Budget Airlines and Full service Airlines in one screen. Book Cheap Air tickets to any destination across the world. <br /> Choose from more than 1000 Best rated Hotels.Get the Best deals on Holiday Packages to multiple destinations.</span></p>
+       </div>
+       <div id="dvBooking" class="hidden">
+            <p  class="message-options-button " onclick=action(this)><span>Booking</span></p>
+       </div>
+       <!-- Ticket Status -->
+       <div id="dvTS" class="hidden">
+           <p  class="message-options-button" onclick=action(this)><span>Ticket Status</span></p>
+       </div>
+       <!--End-->
+       <div id="dvApprove" class="hidden">
+            <p  class="message-options-button" onclick=action(this)><span>Approve</span></p>
+        </div>
+        <!-- jQuery -->
+        <script src="/static/js/jquery.min.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="/static/js/bootstrap.min.js"></script>
+        <!--For Chat Bot-->
+        <script>
+            $(document).ready(function(){
+             $(".boxed").height("20px");
+
+            $(".close").click(function(){
+                $(".boxed").addClass("hidden")
+                $(".boxed").height("20px");
+            });
+            $(".chatIcon img").click(function(e) {
+                var _height = $(".boxed").height();
+                if(_height=="20")
+                 {
+                    $(".boxed").removeClass("hidden")
+                    $(".boxed").height("540px");
+                    $("#chatbox").html("")
+                    $("#dots").removeClass("hidden");
+                    setTimeout(
+                        function() 
+                        {
+                            var botHtml = $("#msg1").html();
+                            $("#chatbox").append(botHtml);
+                            $("#dots").addClass("hidden");
+                        }, 500);
+                        $("#dots").removeClass("hidden");
+                        setTimeout(
+                        function() 
+                        {
+                            var botHtml = $("#msg2").html()
+                            $("#chatbox").append(botHtml);
+                            $("#dots").addClass("hidden");
+                        }, 500);
+                        setTimeout(
+                        function() 
+                        {
+                            var botHtml = $("#dvBooking").html()
+                            $("#chatbox").append(botHtml);
+                            $("#dots").addClass("hidden");
+                        }, 500);
+                        setTimeout(
+                        function() 
+                        {
+                            var botHtml = $("#dvTS").html()
+                            $("#chatbox").append(botHtml);
+                            $("#dots").addClass("hidden");
+                        }, 500);
+                        setTimeout(
+                        function() 
+                        {
+                            var botHtml = $("#dvApprove").html()
+                            $("#chatbox").append(botHtml);
+                            $("#dots").addClass("hidden");
+                        }, 500);
+                    document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+                 }
+                else
+                {
+                    $(".boxed").addClass("hidden")
+                    $(".boxed").height("44px");
+                }
+
+            });
+
+            });
+
+            function getBotResponse() {
+                var rawText = $("#textInput").val();
+                var userHtml = '<p class="userText"><span>' + rawText + "</span></p>";
+                $("#textInput").val("");
+                $("#chatbox").append(userHtml);
+                document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+                $("#dots").removeClass("hidden");
+                $.get("/get", { msg: rawText }).done(function(data) {
+                    var botHtml = data;
+                    $("#dots").addClass("hidden");
+                    $("#chatbox").append(botHtml);
+                    document.getElementById("userInput").scrollIntoView({ block: "start", behavior: "smooth" });
+                });
+                }
+                $("#textInput").keypress(function(e) {
+                if (e.which == 13) {
+                    getBotResponse();
+                }
+            });
+
+         function action(obj)
+            {
+            val = $(obj).text();
+            $(obj).addClass("optionClick");
+            $("#textInput").val(val)
+            getBotResponse(obj);
+            }
+        </script>
+        <!--End of chatbot-->
+    </body>
+</html>

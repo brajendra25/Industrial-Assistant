@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+   {% include 'header.html' %}
+   <style>
+   </style>
+   <body style="background-color:lightblue;">
+   <div > Ebix Cash</div>
+      <div id="chatLogo"  class="chatIcon">
+         <div id="chat-circle1" class="df-btn-text">
+            <i class="fa fa-whatsapp my-float"></i>
+            <span style="margin-left:8px;">Chat with us</span>
+         </div>
+      </div>
+      <div id="container" class="chatbox-holder  hidden">
+         <div class="chatbox">
+            <div class="chatbox-top">
+               <div class="chatbox-avatar hidden">
+               </div>
+               <div class="chat-partner-name">
+                  <span class="status online"></span>
+                  Virtul Agent
+                  <p id='btnClose' class="close" onclick="Close();" style="">X</p>
+               </div>
+            </div>
+            <div id="dvEbixChat" class="chat-messages">
+            </div>
+            <div id="dots" class="hidden">
+               <span class="dot"></span> <span class="dot"></span>
+               <span class="dot"></span><span class="dot"></span>
+            </div>
+            <div align="right">
+               <button type="button" class="btn btn-link hidden" onclick="onLoad();">Start Again</button>
+            </div>
+            <div id="userInput">
+               <input id="textInput" class="form-control" type="text" name="msg"
+                  placeholder="Type Message" />
+               <button class="btn btn-info" class="message-send" onclick="getBotResponse();">
+               <i class="fa fa-paper-plane" style="font-size:20px; cursor: pointer;" aria-hidden="true"></i>
+               </button>
+               <button class="btn btn-info">
+               <i id="btnVoice" class="fa fa-microphone" style="font-size:20px; cursor: pointer;" onclick="VoiceCommand('V');"></i>
+               </button>
+            </div>
+         </div>
+      </div>
+      <div id="msg1" class="hidden">
+         <div class="message-sender">Agent</div>
+         <div class="message-box-holder">
+            <div class="message-box message-partner" style="">
+               <span class="" >  Hi, I am your Virtual Agent</span>
+            </div>
+         </div>
+      </div>
+      <div id="msg2" class="hidden">
+         <div class="hidden">
+            <div class="message-sender">Agent</div>
+            <div class="message-box-holder">
+               <div class="message-box message-partner">
+                  <span>
+                  New Find Budget Airlines and Full service Airlines in one screen. Book Cheap Air tickets to any destination across the world. <br /> Choose from more than 1000 Best rated Hotels.Get the Best deals on Holiday Packages to multiple destinations.
+                  </span>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div id="dvOptions" class=" hidden">
+         <br />
+         <div class="message-sender">Agent</div>
+         <div class="message-box-holder">
+            <div class="message-box message-partner">
+               <p class="message-options-button hidden" onclick=action(this)><span>Booking</span></p>
+               <p  class="message-options-button" onclick=action(this)><span>Ticket Status</span></p>
+               <p  class="message-options-button" onclick=action(this)><span>Approve Tickets</span></p>
+               <p  class="message-options-button hidden" onclick=action(this)><span>Other</span></p>
+            </div>
+         </div>
+      </div>
+      <script src="/static/js/jquery.min.js"></script>
+      <script src="/static/js/livechat.js"></script>
+      <script></script>
+   </body>
+</html>
